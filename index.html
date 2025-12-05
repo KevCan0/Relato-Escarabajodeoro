@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Escarabajo de Oro - Edgar Allan Poe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            background-color: #0e0e0e;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(14, 14, 14, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            border-bottom: 2px solid #b8860b;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #f5deb3;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #b8860b;
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: #b8860b;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #000000;
+            background-image: 
+                linear-gradient(135deg, rgba(14, 14, 14, 0.40) 0%, rgba(26, 26, 26, 0.40) 100%), 
+                url(images/Golden_Beetle2.0.png);
+            background-position: center;
+            background-size: 50% auto;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.2) 0%, transparent 70%);
+            animation: pulse 8s infinite;
+            z-index: 0;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+        }
+
+        .hero-content {
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 4rem;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(236, 171, 8, 0.8), 0 0 40px rgba(0, 0, 0, 0.9);
+            margin-bottom: 1rem;
+            animation: fadeInDown 1.5s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            animation: fadeIn 2s ease;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /*.beetle-icon {
+            font-size: 5rem;
+            color: #b8860b;
+            margin: 2rem 0;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(184, 134, 11, 0.8));
+        }*/
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            z-index: 2;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .scroll-indicator::after {
+            content: '↓';
+            font-size: 2rem;
+            color: #b8860b;
+            filter: drop-shadow(0 0 10px rgba(184, 134, 11, 0.8));
+        }
+
+        /* Grid System - 12 columnas */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .col-12 { grid-column: span 12; }
+        .col-11 { grid-column: span 11; }
+        .col-10 { grid-column: span 10; }
+        .col-9 { grid-column: span 9; }
+        .col-8 { grid-column: span 8; }
+        .col-7 { grid-column: span 7; }
+        .col-6 { grid-column: span 6; }
+        .col-5 { grid-column: span 5; }
+        .col-4 { grid-column: span 4; }
+        .col-3 { grid-column: span 3; }
+        .col-2 { grid-column: span 2; }
+        .col-1 { grid-column: span 1; }
+
+        /* Sections */
+        section {
+            padding: 5rem 0;
+            width: 100%;
+            scroll-margin-top: 60px;
+        }
+
+        #biografia {
+            margin-top: 19rem;
+        }
+
+        h2 {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 3rem;
+            color: #4b0000;
+            text-align: center;
+            margin-bottom: 3rem;
+            text-shadow: 0 0 10px rgba(184, 134, 11, 0.3);
+        }
+
+        /* Biografía Section */
+        .biografia-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .biografia-image {
+            grid-column: span 4;
+            position: relative;
+        }
+
+        .poe-portrait {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: linear-gradient(135deg, #4b0000, #b8860b);
+            background-image: url(images/allanpoe.jpg);
+            background-size: cover;
+            background-position: center;
+            border: 4px solid #b8860b;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(184, 134, 11, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .poe-portrait::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent);
+        }
+
+        .biografia-text {
+            grid-column: span 8;
+            background: rgba(75, 0, 0, 0.1);
+            border: 2px solid #b8860b;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(184, 134, 11, 0.2);
+        }
+
+        .biografia-text h3 {
+            color: #b8860b;
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .biografia-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            color: #f5deb3;
+        }
+
+        .bio-facts {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #b8860b;
+        }
+
+        .bio-fact {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .bio-fact-icon {
+            font-size: 2rem;
+            color: #b8860b;
+        }
+
+        .bio-fact-text {
+            flex: 1;
+        }
+
+        .bio-fact-label {
+            font-size: 0.9rem;
+            color: #b8860b;
+            font-weight: bold;
+        }
+
+        .bio-fact-value {
+            font-size: 1rem;
+            color: #f5deb3;
+        }
+
+        @media (max-width: 1024px) {
+            .biografia-image {
+                grid-column: span 12;
+            }
+            
+            .biografia-text {
+                grid-column: span 12;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .bio-facts {
+                grid-template-columns: 1fr;
+            }
+        }
+        .historia-content {
+            background: rgba(75, 0, 0, 0.1);
+            border: 2px solid #b8860b;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(184, 134, 11, 0.2);
+            position: relative;
+            min-height: 600px;
+            perspective: 1500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .book-container {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .book-page {
+            position: absolute;
+            width: 90%;
+            height: auto;
+            max-height: 100%;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(75, 0, 0, 0.3), rgba(184, 134, 11, 0.1));
+            border: 2px solid #b8860b;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            transition: opacity 0.4s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 0;
+        }
+
+        .book-page.active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 10;
+            visibility: visible;
+            animation: none;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .book-page.flip-out {
+            animation: fadeOut 0.4s forwards;
+            z-index: 5;
+        }
+
+        .book-page.flip-in {
+            animation: fadeIn 0.4s forwards;
+            z-index: 10;
+            visibility: visible;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .book-page p {
+            color: #f5deb3;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 1.5rem;
+            font-family: 'Merriweather', serif;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 1rem;
+            right: 2rem;
+            color: #b8860b;
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 1.2rem;
+        }
+
+        /* Botones de navegación en forma de moneda */
+        .book-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .coin-button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: 
+                radial-gradient(circle at 30% 30%, #ffd700, #b8860b 50%, #8b6914);
+            border: 4px solid #654321;
+            box-shadow: 
+                0 8px 20px rgba(0, 0, 0, 0.5),
+                inset 0 2px 10px rgba(255, 215, 0, 0.5),
+                inset 0 -2px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #2c2416;
+            transition: all 0.3s;
+            position: relative;
+            font-weight: bold;
+        }
+
+        .coin-button::before {
+            content: '';
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            border: 2px dashed rgba(101, 67, 33, 0.3);
+        }
+
+        .coin-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 12px 30px rgba(184, 134, 11, 0.6),
+                inset 0 2px 10px rgba(255, 215, 0, 0.7);
+        }
+
+        .coin-button:active {
+            transform: translateY(-2px) scale(0.95);
+        }
+
+        .coin-button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .coin-button:disabled:hover {
+            transform: none;
+            box-shadow: 
+                0 8px 20px rgba(0, 0, 0, 0.5),
+                inset 0 2px 10px rgba(255, 215, 0, 0.5),
+                inset 0 -2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Personajes Section */
+        .personajes-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .personaje-card {
+            grid-column: span 3;
+            background: linear-gradient(135deg, rgba(75, 0, 0, 0.3), rgba(184, 134, 11, 0.1));
+            padding: 2.5rem;
+            border-radius: 10px;
+            border: 2px solid #b8860b;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .personaje-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
+        }
+
+        .personaje-card h3 {
+            color: #b8860b;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-family: 'Cinzel Decorative', cursive;
+        }
+
+        .personaje-card p {
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .personaje-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        /* Galería Section */
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            justify-items: center;
+        }
+
+        .galeria-item {
+            grid-column: span 4;
+            position: relative;
+            height: 300px;
+            background: linear-gradient(rgba(75, 0, 0, 0.3));
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #b8860b;
+            cursor: pointer;
+            transition: transform 0.3s;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .galeria-item:nth-child(4) {
+            grid-column: 3 / span 4;
+        }
+
+        .galeria-item:nth-child(5) {
+            grid-column: 7 / span 4;
+        }
+
+        .galeria-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(184, 134, 11, 0.5)
+        }
+
+        .galeria-item::after {
+            content: attr(data-title);
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            padding: 5rem 1rem;
+            background: linear-gradient(rgba(75, 0, 0, 0.3),);
+            color: #b8860b;
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 1.5rem;
+            text-align: center;
+            z-index: 3;
+        }
+
+        .galeria-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            height: 100%;
+            opacity: 0.5;
+        }
+
+        .galeria-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #b8860b, #8b6914);
+            color: #2c2416;
+            border: 2px solid #b8860b;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        .galeria-btn:hover {
+            background: linear-gradient(135deg, #d4af37, #b8860b);
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 5px 15px rgba(184, 134, 11, 0.5);
+        }
+
+        .galeria-btn:active {
+            transform: translateX(-50%) translateY(-1px);
+        }
+
+        /* Descargar PDF Section */
+        .descargar-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .pdf-info {
+            background: rgba(75, 0, 0, 0.1);
+            border: 2px solid #b8860b;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(184, 134, 11, 0.2);
+            text-align: center;
+        }
+
+        .pdf-info h3 {
+            font-family: 'Cinzel Decorative', cursive;
+            color: #b8860b;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .pdf-info p {
+            color: #f5deb3;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-descargar {
+            display: inline-block;
+            background: linear-gradient(135deg, #b8860b, #8b6914);
+            color: #2c2416;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(184, 134, 11, 0.3);
+        }
+
+        .btn-descargar:hover {
+            background: linear-gradient(135deg, #d4af37, #b8860b);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(184, 134, 11, 0.5);
+        }
+
+        .pdf-viewer {
+            background: rgba(75, 0, 0, 0.1);
+            border: 2px solid #b8860b;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(184, 134, 11, 0.2);
+        }
+
+        .pdf-viewer h3 {
+            font-family: 'Cinzel Decorative', cursive;
+            color: #b8860b;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            .descargar-container {
+                grid-template-columns: 1fr;
+            }
+
+            .pdf-viewer iframe {
+                height: 500px !important;
+            }
+        }
+
+        /* Contacto Section */
+        .contacto-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(75, 0, 0, 0.1);
+            border: 2px solid #b8860b;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(184, 134, 11, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #b8860b;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(14, 14, 14, 0.8);
+            border: 2px solid #b8860b;
+            border-radius: 5px;
+            color: #f5deb3;
+            font-family: 'Merriweather', serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #f5deb3;
+            box-shadow: 0 0 10px rgba(184, 134, 11, 0.3);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #4b0000, #b8860b);
+            border: 2px solid #b8860b;
+            border-radius: 5px;
+            color: #f5deb3;
+            font-size: 1.2rem;
+            font-family: 'Cinzel Decorative', cursive;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(184, 134, 11, 0.5);
+        }
+
+        .team-info {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #b8860b;
+            text-align: center;
+        }
+
+        .team-info h3 {
+            color: #b8860b;
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-member {
+            color: #f5deb3;
+            margin: 0.5rem 0;
+        }
+
+        /* Footer */
+        footer {
+            background: #0e0e0e;
+            text-align: center;
+            padding: 2rem;
+            border-top: 2px solid #b8860b;
+            margin-top: 5rem;
+        }
+
+        footer p {
+            color: #b8860b;
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .personaje-card {
+                grid-column: span 6;
+            }
+            
+            .galeria-item {
+                grid-column: span 6;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .personaje-card,
+            .galeria-item {
+                grid-column: span 12;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .row {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#biografia">Biografía</a></li>
+            <li><a href="#historia">Historia</a></li>
+            <li><a href="#personajes">Personajes</a></li>
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section / Inicio -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>El Escarabajo de Oro</h1>
+            <p class="subtitle">Un misterio de Edgar Allan Poe</p>
+            <p style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);">Un relato de tesoros ocultos, códigos cifrados y aventuras en la oscuridad</p>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- Biografía Section -->
+    <section id="biografia">
+        <div class="container">
+            <h2>Edgar Allan Poe</h2>
+            <div class="biografia-container">
+                <div class="biografia-image">
+                    <div class="poe-portrait">
+                        <!-- Imagen de Edgar Allan Poe como fondo -->
+                    </div>
+                </div>
+                
+                <div class="biografia-text">
+                    <h3>El Maestro del Terror y el Misterio</h3>
+                    <p>
+                        Edgar Allan Poe (1809-1849) fue un escritor, poeta, crítico y periodista estadounidense, 
+                        considerado uno de los maestros universales del relato corto y renovador de la novela gótica. 
+                        Su vida estuvo marcada por la tragedia, la pobreza y el alcoholismo, elementos que influyeron 
+                        profundamente en su obra literaria.
+                    </p>
+                    <p>
+                        Nacido en Boston, Massachusetts, Poe quedó huérfano a temprana edad y fue criado por la familia 
+                        Allan en Richmond, Virginia. Aunque nunca fue adoptado oficialmente, tomó el apellido de su 
+                        padre adoptivo como segundo nombre. Estudió en la Universidad de Virginia y en la Academia 
+                        Militar de West Point, pero no completó sus estudios en ninguna de las dos instituciones.
+                    </p>
+                    <p>
+                        Poe es reconocido como el inventor del relato detectivesco moderno con sus historias del 
+                        detective C. Auguste Dupin. "El Escarabajo de Oro", publicado en 1843, es considerado uno de 
+                        sus relatos más populares y fue premiado en su época. La obra combina elementos de misterio, 
+                        aventura y criptografía, demostrando la fascinación del autor por los enigmas y los códigos secretos.
+                    </p>
+                    
+                    <div class="bio-facts">
+                        <div class="bio-fact">
+                            <div class="bio-fact-icon"></div>
+                            <div class="bio-fact-text">
+                                <div class="bio-fact-label">Nacimiento</div>
+                                <div class="bio-fact-value">19 de enero, 1809 - Boston, MA</div>
+                            </div>
+                        </div>
+                        <div class="bio-fact">
+                            <div class="bio-fact-icon"></div>
+                            <div class="bio-fact-text">
+                                <div class="bio-fact-label">Fallecimiento</div>
+                                <div class="bio-fact-value">7 de octubre, 1849 - Baltimore, MD</div>
+                            </div>
+                        </div>
+                        <div class="bio-fact">
+                            <div class="bio-fact-icon"></div>
+                            <div class="bio-fact-text">
+                                <div class="bio-fact-label">Obras destacadas</div>
+                                <div class="bio-fact-value">El Cuervo, El Corazón Delator, La Caída de la Casa Usher</div>
+                            </div>
+                        </div>
+                        <div class="bio-fact">
+                            <div class="bio-fact-icon"></div>
+                            <div class="bio-fact-text">
+                                <div class="bio-fact-label">Legado</div>
+                                <div class="bio-fact-value">Padre del relato detectivesco y maestro del terror gótico</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Historia Section -->
+    <section id="historia">
+        <div class="container">
+            <h2>Historia</h2>
+            <div class="row">
+                <div class="col-12">
+                    <div class="descargar-container">
+                        <div class="pdf-info">
+                            <h3>El Escarabajo de Oro</h3>
+                            <p>Lee la obra completa de Edgar Allan Poe</p>
+                            <a href="images/Poe Edgar Allan - El escarabajo de oro.pdf" download class="btn-descargar">
+                                📥 Descargar PDF
+                            </a>
+                        </div>
+                        <div class="pdf-viewer">
+                            <h3>Lector de PDF</h3>
+                            <iframe src="images/Poe Edgar Allan - El escarabajo de oro.pdf" width="100%" height="600px" style="border-radius: 10px; border: 2px solid #b8860b;"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personajes Section -->
+    <section id="personajes">
+        <div class="container">
+            <h2>Personajes</h2>
+            <div class="personajes-grid">
+                <div class="personaje-card">
+                    <div class="personaje-icon"></div>
+                    <h3>William Legrand</h3>
+                    <p>
+                        Protagonista del relato, un hombre de familia acomodada que ha caído en desgracia. Posee una 
+                        mente brillante y se obsesiona con resolver el misterio del escarabajo de oro. Su conocimiento 
+                        en criptografía será clave para descifrar el código que llevará al tesoro del Capitán Kidd.
+                    </p>
+                </div>
+                <div class="personaje-card">
+                    <div class="personaje-icon"></div>
+                    <h3>Jupiter</h3>
+                    <BR>
+                    <p>
+                        Fiel sirviente de Legrand, es un hombre afroamericano liberto que ha permanecido leal a su 
+                        antiguo amo por afecto y devoción. Aunque preocupado por la aparente locura de Legrand, lo 
+                        acompaña en su peligrosa aventura con valentía y humor.
+                    </p>
+                </div>
+                <div class="personaje-card">
+                    <div class="personaje-icon"></div>
+                    <h3>El Narrador</h3>
+                    <p>
+                        Amigo de Legrand y narrador de la historia. Representa la voz de la razón y el escepticismo, 
+                        preocupándose por la salud mental de su amigo. Su perspectiva permite al lector experimentar 
+                        el misterio junto con él, descubriendo gradualmente la brillantez del plan de Legrand.
+                    </p>
+                </div>
+                <div class="personaje-card">
+                    <div class="personaje-icon"></div>
+                    <h3>El Escarabajo</h3>
+                    <p>
+                        Más que un simple insecto, el escarabajo de oro se convierte en el catalizador de toda la 
+                        aventura. Su apariencia única, con marcas que asemejan una calavera en su caparazón, simboliza 
+                        tanto la muerte como la promesa de riqueza, conectando el presente con los secretos del pasado.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería Section -->
+    <section id="galeria">
+        <div class="container">
+            <h2>Galería</h2>
+            <div class="galeria-grid">
+                <div class="galeria-item" data-title="El Escarabajo Dorado" data-id="escarabajo" onclick="irDetalles('escarabajo', 'El Escarabajo Dorado')">
+                    <div class="galeria-placeholder"></div>
+                    <button class="galeria-btn" type="button" onclick="event.stopPropagation(); irDetalles('escarabajo', 'El Escarabajo Dorado')">Ver Detalles</button>
+                </div>
+                <div class="galeria-item" data-title="El Pergamino Cifrado" data-id="pergamino" onclick="irDetalles('pergamino', 'El Pergamino Cifrado')">
+                    <div class="galeria-placeholder"></div>
+                    <button class="galeria-btn" type="button" onclick="event.stopPropagation(); irDetalles('pergamino', 'El Pergamino Cifrado')">Ver Detalles</button>
+                </div>
+                <div class="galeria-item" data-title="La Isla Misteriosa" data-id="isla" onclick="irDetalles('isla', 'La Isla Misteriosa')">
+                    <div class="galeria-placeholder"></div>
+                    <button class="galeria-btn" type="button" onclick="event.stopPropagation(); irDetalles('isla', 'La Isla Misteriosa')">Ver Detalles</button>
+                </div>
+                <div class="galeria-item" data-title="El Tesoro del Capitán Kidd" data-id="tesoro" onclick="irDetalles('tesoro', 'El Tesoro del Capitán Kidd')">
+                    <div class="galeria-placeholder"></div>
+                    <button class="galeria-btn" type="button" onclick="event.stopPropagation(); irDetalles('tesoro', 'El Tesoro del Capitán Kidd')">Ver Detalles</button>
+                </div>
+                <div class="galeria-item" data-title="Bosques Sombríos" data-id="bosques" onclick="irDetalles('bosques', 'Bosques Sombríos')">
+                    <div class="galeria-placeholder"></div>
+                    <button class="galeria-btn" type="button" onclick="event.stopPropagation(); irDetalles('bosques', 'Bosques Sombríos')">Ver Detalles</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Descargar PDF Section -->
+    <!-- Contacto Section -->
+    <section id="contacto">
+        <div class="container">
+            <h2>Contacto</h2>
+            <div class="row">
+                <div class="col-12">
+                    <div class="contacto-container">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="nombre">Nombre Completo</label>
+                                <input type="text" id="nombre" name="nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Correo Electrónico</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="asunto">Asunto</label>
+                                <input type="text" id="asunto" name="asunto" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mensaje">Mensaje</label>
+                                <textarea id="mensaje" name="mensaje" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit">Enviar Mensaje</button>
+                        </form>
+
+                        <div class="team-info">
+                            <h3>Equipo de Desarrollo</h3>
+                            <p class="team-member">Kevin Adrian Bacab Cano</p>
+                            <p class="team-member">Jhessiel Abner Dzul Cruz</p>
+                            <p class="team-member">Pedro Jose Marin Acosta</p>
+                            <p class="team-member">Lizandro Adolfo Francisco Caamal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 El Escarabajo de Oro | Diseño Editorial</p>
+        <p>Lic. Baltazar Vera Gutiérrez | Ing. en Programación y Web master</p>
+    </footer>
+
+    <script>
+        // Smooth scroll para los enlaces de navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Efecto parallax sutil en el hero
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            const scrolled = window.pageYOffset;
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Sistema de navegación del libro con efecto de voltear página
+        let currentPage = 1;
+        const totalPages = 4;
+        const pages = document.querySelectorAll('.book-page');
+        const prevBtn = document.getElementById('prevPage');
+        const nextBtn = document.getElementById('nextPage');
+
+        function updateButtons() {
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
+        }
+
+        function showPage(pageNumber) {
+            pages.forEach(page => {
+                const pageNum = parseInt(page.getAttribute('data-page'));
+                
+                if (pageNum === pageNumber) {
+                    page.classList.remove('flip-out');
+                    page.classList.add('active', 'flip-in');
+                } else if (page.classList.contains('active')) {
+                    page.classList.add('flip-out');
+                    setTimeout(() => {
+                        page.classList.remove('active', 'flip-in', 'flip-out');
+                    }, 800);
+                }
+            });
+            updateButtons();
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        });
+
+        // Inicializar botones
+        updateButtons();
+
+        // Función para ir a detalles de galería
+        function irDetalles(id, titulo) {
+            sessionStorage.setItem('galeriaId', id);
+            sessionStorage.setItem('galeriaTitle', titulo);
+            window.location.href = 'galeria-detalle.html?id=' + id;
+        }
+
+        // Manejo del formulario de contacto
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
